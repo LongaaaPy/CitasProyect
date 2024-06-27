@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportesCitas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="708d7e60-b665-42aa-a62c-e3b25fca1dd4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[SELECT
+     pacientes.`PacIdentificacion` AS pacientes_PacIdentificacion,
+     pacientes.`PacNombres` AS pacientes_PacNombres,
+     pacientes.`PacApellidos` AS pacientes_PacApellidos,
+     pacientes.`PacFechaNacimiento` AS pacientes_PacFechaNacimiento,
+     pacientes.`PacSexo` AS pacientes_PacSexo
+FROM
+     `pacientes` pacientes]]>
+	</queryString>
+	<field name="pacientes_PacIdentificacion" class="java.lang.String"/>
+	<field name="pacientes_PacNombres" class="java.lang.String"/>
+	<field name="pacientes_PacApellidos" class="java.lang.String"/>
+	<field name="pacientes_PacFechaNacimiento" class="java.sql.Date"/>
+	<field name="pacientes_PacSexo" class="java.lang.String"/>
+	<variable name="pacientes_PacSexo_1" class="java.lang.Integer" resetType="Group" resetGroup="Group2" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{pacientes_PacSexo}]]></variableExpression>
+	</variable>
+	<variable name="pacientes_PacNombres_1" class="java.lang.Integer" resetType="Group" resetGroup="Group2" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{pacientes_PacNombres}]]></variableExpression>
+	</variable>
+	<variable name="pacientes_PacIdentificacion_1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
+		<variableExpression><![CDATA[$F{pacientes_PacIdentificacion}]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="116">
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="0" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="9110331a-aeb5-43ed-a22f-955b088ae6b8"/>
+				</rectangle>
+				<textField>
+					<reportElement x="36" y="35" width="100" height="20" uuid="72bc1625-aef5-4d08-b20c-287e20f96448"/>
+					<textFieldExpression><![CDATA[$F{pacientes_PacIdentificacion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="225" y="48" width="100" height="20" uuid="d59f5c81-e191-469a-bca5-13e0ff93b5df"/>
+					<textFieldExpression><![CDATA[$F{pacientes_PacNombres}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="404" y="73" width="100" height="20" uuid="2e0fb873-9f68-4b32-a90d-97d0bb997a8b"/>
+					<textFieldExpression><![CDATA[$F{pacientes_PacSexo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="36"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+		<groupHeader>
+			<band height="162">
+				<textField>
+					<reportElement x="207" y="11" width="100" height="20" uuid="21369262-c088-444a-8a4a-71b3da7dd04b"/>
+					<textFieldExpression><![CDATA[$F{pacientes_PacApellidos}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="8b242e5b-882c-4788-9990-2025df57b64a"/>
+				<imageExpression><![CDATA["leaf_banner_gray.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="a3adace9-835c-4f31-a16d-c8f3adffbe38"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Reportes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="157" height="22" uuid="a945085f-7ec8-4ea3-8d24-efe429b7d452"/>
+				<text><![CDATA[Pacientes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="17" y="19" width="100" height="15" uuid="b9db524c-38cc-40a0-ad18-aed110569a3f"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="f5fd23a5-20cd-467b-93b3-41f9caa9c89e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="163" y="19" width="100" height="15" uuid="988a62c4-2a99-47df-b22d-8cdd38ae021f"/>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="275" y="19" width="100" height="15" uuid="445c71bf-1998-429f-a8c3-f704a9b03df1"/>
+				<text><![CDATA[FechaNacimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="433" y="19" width="100" height="15" uuid="dfd8067a-1db8-4e2e-9742-a95810b07d0c"/>
+				<text><![CDATA[Genero]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="8758cd94-44e3-45be-8c0f-af14d192b8ed"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="65" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="bb2e3e05-ed2a-49a0-ae8a-c2e4cc1bb783"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="7cfd7a10-f6ab-4447-8014-39005b5355d8"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="752c37c8-6398-444d-bd02-22ddbe772423"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="a884e795-68e6-4158-a4bc-fec28d65dec9"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
